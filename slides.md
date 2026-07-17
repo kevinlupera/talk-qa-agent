@@ -462,6 +462,64 @@ El TSA tiene un red team real que <span v-mark.underline.red>intenta colar armas
 </div>
 
 ---
+
+# 🧰 Cada capa, en código
+
+<div class="mono-note pb-3">Cómo se ve implementar cada control. Breve, no exhaustivo.</div>
+
+<div class="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+
+<div>
+
+**⚡ Determinista** · sin IA, sin tokens
+
+```python
+assert not tool_called(result, "issue_refund")
+assert Contains(result, "fuera de política")
+```
+
+</div>
+
+<div>
+
+**👮 Juez LLM** · calidad + trayectoria
+
+```python
+CorrectnessEvaluator(rubric=REFUND_RUBRIC).score(result)
+TrajectoryEvaluator(expected=["get_policy", "get_order"])
+```
+
+</div>
+
+<div>
+
+**📄 Fidelidad** · ¿lo dice la fuente?
+
+```python
+FaithfulnessEvaluator(source=policy).score(answer)
+# grounding < 0.85 → falla
+```
+
+</div>
+
+<div>
+
+**🛂 Guardrail** · runtime, por request
+
+```python
+bedrock.apply_guardrail(
+    guardrailIdentifier=GID, source="OUTPUT",
+    content=[{"text": {"text": answer}}],
+)  # ACTION: GUARDRAIL_INTERVENED → bloquea
+```
+
+</div>
+
+</div>
+
+<div class="mono-note pt-3">Pseudocódigo cercano a la API real — el repo trae los scripts completos.</div>
+
+---
 layout: two-cols
 ---
 
