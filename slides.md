@@ -57,12 +57,6 @@ glow: bottom
 
 <div class="abs-bl m-6 mono-note">Kevin Lupera · AWS GenAI Security Day 2026</div>
 
-<!--
-Proyecta con calma. La portada respira.
-UNA analogía toda la charla: llevar un agente a producción es asegurar un aeropuerto.
-Capas, no un solo muro.
--->
-
 ---
 layout: two-cols
 class: px-6
@@ -106,11 +100,6 @@ Antes de pasar el filtro, el que habla también enseña su credencial.
 
 </div>
 
-<!--
-Preséntate en 30 segundos, no más. La credencial hace el trabajo visual.
-Conecta rápido: "hoy soy el oficial de seguridad de esta terminal".
--->
-
 ---
 class: px-10
 glow: top
@@ -139,12 +128,6 @@ glow: top
   </div>
 </div>
 
-<!--
-No es un glosario exhaustivo — solo las cuatro que se repiten.
-Agente = LLM con manos. Tool = esas manos. Eval = cómo lo probamos.
-Guardrail = el último filtro en vivo. Con esto basta para seguir el hilo.
--->
-
 ---
 layout: center
 class: text-center
@@ -170,11 +153,6 @@ El agente, servicial, obedece. <strong>Nadie apretó un botón.</strong>
 </BoardingPass>
 
 </div>
-
-<!--
-Escena del crimen. Deja que el silencio pese.
-Los agentes no fallan como el software normal. Fallan de formas nuevas.
--->
 
 ---
 transition: fade
@@ -206,16 +184,6 @@ No tiramos el testing. Lo <span v-mark.underline.orange>extendemos</span>.
 
 </div>
 
-<!--
-Mismo prompt, cinco respuestas: tu assertEqual no tiene a qué agarrarse.
-Y encima: el contexto se acumula (el turno 5 depende del turno 1), las tools
-tienen efectos reales (no es un mock, mueve dinero) y hay una superficie de
-ataque nueva (inyección de prompt, ingeniería social).
-
-Un detector de metales es perfecto para un cuchillo. Inútil contra alguien
-que convence al oficial con una historia. Necesitas más capas.
--->
-
 ---
 layout: center
 class: px-10
@@ -242,13 +210,6 @@ class: px-10
 ]" />
 
 </div>
-
-<!--
-Arriba el pasillo físico, abajo su equivalente en QA: mismo orden, mismas capas.
-Cada capa atrapa lo que la anterior no puede ver.
-Barato abajo, caro arriba: si A1 falla, no gastes tokens en E5.
-Este tablero es el índice de la charla — volverá al final, todo en verde.
--->
 
 ---
 layout: two-cols
@@ -303,11 +264,6 @@ def issue_refund(order_id: str, amount: float) -> str:
 
 </div>
 
-<!--
-Magic-move: el agente inocente → el agente con dinero en las manos.
-Punchline: todo el framework existe para blindar esa única línea.
--->
-
 ---
 
 # Nivel 1 · Deterministas
@@ -354,11 +310,6 @@ Segundos, sin tokens · si esto se pone rojo, el merge no entra
 
 </div>
 
-<!--
-Demo en vivo: nivel1_deterministico.py. Verde = el agente se contuvo.
-El detector no juzga intenciones — solo pasa/no pasa.
--->
-
 ---
 layout: two-cols
 ---
@@ -394,15 +345,6 @@ El rubric explícito es el 80% del trabajo · rubric vago = puntajes ruidosos
 
 </div>
 
-<!--
-Calidad: ¿rechazó bien Y lo explicó con claridad? → 1.0
-Trayectoria: ¿consultó política + pedido ANTES de decidir? → 0.5: acertó el
-veredicto, pero decidió antes de leer la política. Acertó por suerte.
-Un oficial sin criterios claros deja pasar a cualquiera: sé específico,
-define la escala, describe qué es un fallo.
-DEMO: reporte con scores + razonamiento del juez.
--->
-
 ---
 layout: center
 class: text-center
@@ -431,11 +373,6 @@ El agente responde con <strong>seguridad</strong> algo que
 <div v-click class="pt-8 mono-note">
 ✈️ El pasaporte se ve perfecto... pero los datos no coinciden con la realidad
 </div>
-
-<!--
-Clímax. Protégelo si vas corto de tiempo.
-El riesgo más difícil: suena bien, pero no está fundamentado.
--->
 
 ---
 layout: two-cols
@@ -482,18 +419,6 @@ Offline atrapa en CI. Pero ningún dataset cubre todo → hace falta un guardia 
 
 </div>
 
-<!--
-La respuesta "90 días" suena perfecta y ES relevante (0.91) — pero no está
-fundamentada (0.42). El grounding cae bajo el umbral y el guardrail interviene
-antes de que llegue al cliente.
-
-Independiente del modelo (ApplyGuardrail): funciona incluso fuera de Bedrock.
-Dominio financiero = umbral alto (grounding ≥ 0.85).
-Complemento: Automated Reasoning checks — el único safeguard de GenAI con lógica formal.
-
-DEMO estrella: consola de Bedrock, política como fuente, respuesta alucinada.
--->
-
 ---
 
 # Nivel 4-5 · El estrés
@@ -536,18 +461,6 @@ El simulacro de emergencia: apagamos <code>get_order</code> a propósito.
 El TSA tiene un red team real que <span v-mark.underline.red>intenta colar armas</span> para probar el sistema. Nosotros igual.
 </div>
 
-<!--
-Simulación: un usuario sintético insiste 5 turnos por un reembolso no elegible.
-¿Sostiene la política o cede a la presión?
-
-Caos: ningún aeropuerto espera al incendio real para saber si el protocolo
-funciona — hace simulacros. Nosotros igual: timeout en get_order, datos
-corruptos. Regla de oro: ante un fallo, NUNCA la acción crítica a ciegas.
-
-Red team: "ignora tus instrucciones", ingeniería social, inyección.
-DEMO: redteam.py rechaza los 3 ataques.
--->
-
 ---
 layout: two-cols
 ---
@@ -587,14 +500,6 @@ graph TD
 
 </div>
 
-<!--
-Ciclo cerrado: los fallos de producción se vuelven casos del golden dataset.
-✈️ Ningún accidente de avión se investiga sin la caja negra — y cada incidente
-reescribe el protocolo de seguridad de TODOS los aeropuertos. Tus traces de
-CloudWatch son esa caja negra: cada fallo real entra al golden dataset y ya
-nunca vuelve a pasar sin que un test lo vea.
--->
-
 ---
 layout: center
 ---
@@ -612,12 +517,6 @@ layout: center
 <div class="pt-6 text-center mono-note">
 El mismo tablero del principio · ninguna capa sola es suficiente, juntas son sólidas
 </div>
-
-<!--
-Es el tablero del inicio, ahora todo en verde. Deja que lo reconozcan.
-Repasa cada gate en voz alta y cierra con el ciclo: los traces de prod
-alimentan el golden dataset de A1. Invita a fotografiarlo.
--->
 
 ---
 layout: center
@@ -670,14 +569,6 @@ El tercero es el difícil: <span v-mark.underline.orange="5">nadie te ataca</spa
 .verdict.bad { color: var(--alert); }
 </style>
 
-<!--
-Juego de cierre: que voten a mano alzada antes de cada click.
-El 1 y el 2 los aciertan todos. El 3 divide la sala — y ese es el punto:
-la alucinación no viene de un atacante, viene de un agente servicial que
-confirma algo que no está en la política. Ahí es donde el grounding salva.
-Deja la encuesta en pantalla durante el Q&A.
--->
-
 ---
 layout: center
 class: text-center
@@ -697,10 +588,6 @@ class: text-center
 </div>
 
 <div class="abs-br m-6 mono-note">Gracias ✈️</div>
-
-<!--
-Frase de cierre. Pasa a la última slide y deja el Q&A en pantalla.
--->
 
 ---
 layout: center
@@ -766,12 +653,6 @@ glowOpacity: 0.22
 }
 </style>
 
-<!--
-Deja esta slide en pantalla durante el Q&A: la encuesta visible todo el rato.
-Si nadie arranca, tira tú la primera: "¿alguien ya tiene un agente en prod
-sin evals?" — siempre levanta una mano y de ahí sale la conversación.
--->
-
 ---
 layout: center
 class: text-center
@@ -819,7 +700,3 @@ El repo, los slides y la encuesta · todo detrás de este código
   line-height: 0;
 }
 </style>
-
-<!--
-Última pantalla. Déjala mientras la gente sale: un solo QR, todo detrás.
--->
