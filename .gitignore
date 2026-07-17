@@ -3,3 +3,8 @@ dist/
 *.pdf
 *.local
 .DS_Store
+
+# Material personal — no publicar
+GUION.md
+POST.md
+game/
