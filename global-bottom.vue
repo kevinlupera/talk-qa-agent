@@ -62,14 +62,26 @@ function usePoly(count: number) {
 const poly1 = usePoly(10)
 const poly2 = usePoly(6)
 const poly3 = usePoly(3)
+
+// slide 1 = portada full-bleed: sin glow ni patrocinadores encima
+const isCover = computed(() => currentSlideRoute.value.no === 1)
 </script>
 
 <template>
-  <div>
+  <div v-if="!isCover">
     <div class="glow" :style="{ filter: `blur(70px) hue-rotate(${hue}deg)` }" aria-hidden="true">
       <div class="clip clip-1" :style="{ 'clip-path': `polygon(${poly1})`, opacity }" />
       <div class="clip clip-2" :style="{ 'clip-path': `polygon(${poly2})`, opacity }" />
       <div class="clip clip-3" :style="{ 'clip-path': `polygon(${poly3})`, 'opacity': 0.22 }" />
+    </div>
+    <!-- patrocinadores del esquema: en todas las diapositivas -->
+    <div class="sponsors" aria-hidden="true">
+      <img src="/spon-deuna.png" alt="deuna!" style="height: 14px" />
+      <img src="/spon-bitdefender.png" alt="Bitdefender" style="height: 22px" />
+      <img src="/spon-cloudsmart.png" alt="Cloud Smart TI" style="height: 13px" />
+      <img src="/spon-ianex.png" alt="IANEX" style="height: 12px" />
+      <img src="/spon-caffelatto.png" alt="Caffè Latto" style="height: 28px" />
+      <img src="/aws-ug-quito.png" alt="AWS User Group Quito" style="height: 28px" />
     </div>
   </div>
 </template>
@@ -96,6 +108,23 @@ const poly3 = usePoly(3)
   transform: scale(.45);
   transform-origin: center;
 }
+/* strip de patrocinadores: pie de cada slide, no intercepta clics */
+.sponsors {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 4px 16px;
+  pointer-events: none;
+  opacity: .9;
+}
+.sponsors img { width: auto; object-fit: contain; }
+
 .clip-1 { background: linear-gradient(90deg, #b06a00, #ffb000); }
 .clip-2 { background: linear-gradient(270deg, #6b3f00, #ff8c1a); }
 .clip-3 { background: linear-gradient(0deg, #00e08f, #0d7a57); }

@@ -26,11 +26,13 @@ body {
 /* la terminal: rejilla de pista + scanlines CRT */
 .slidev-layout {
   background-color: transparent;
+  /* última capa = gradiente del esquema (Diapositivas.pptx.svg); grid ámbar y glow encima */
   background-image:
     linear-gradient(rgba(255, 176, 0, .045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 176, 0, .045) 1px, transparent 1px),
-    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(255, 176, 0, .1), transparent 70%);
-  background-size: 46px 46px, 46px 46px, 100% 100%;
+    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(255, 176, 0, .1), transparent 70%),
+    linear-gradient(90deg, #19212e 0%, #2d2560 50%, #3a2d72 100%);
+  background-size: 46px 46px, 46px 46px, 100% 100%, 100% 100%;
   color: var(--paper);
   font-family: var(--f-body);
   position: relative;
@@ -84,6 +86,18 @@ body {
 }
 
 .slidev-layout strong { color: var(--amber); font-weight: 700; }
+
+/* los QR van por encima del overlay de scanlines: las líneas ensucian
+   los módulos y la cámara del móvil falla más */
+.qr,
+.qr-big,
+.plate:has(.qr) {
+  position: relative;
+  z-index: 50;
+}
+/* la .plate con backdrop-filter crea stacking context: sin esto el z-index
+   del QR no lo saca de debajo del overlay */
+.plate:has(.qr) { backdrop-filter: none; }
 
 /* v-clicks: aparecen desenfocados y enfocan al entrar */
 .slidev-vclick-target {
@@ -146,6 +160,13 @@ body {
 }
 .sign--alert { background: var(--alert); color: #fff; }
 .sign--ok { background: var(--ok); }
+/* el <code> dentro del rótulo hereda el color del rótulo, no el del fondo oscuro */
+.sign code {
+  background: rgba(0, 0, 0, .16) !important;
+  color: inherit !important;
+  padding: 0 .3em;
+  border-radius: 2px;
+}
 
 .mono-note {
   font-family: var(--f-mono);

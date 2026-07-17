@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "playwright-chromium": "^1.61.1",
-    "slidev-addon-fancy-arrow": "^0.16.1"
+    "slidev-addon-fancy-arrow": "^0.16.1",
+    "slidev-addon-qrcode": "^1.0.2"
   }
 }
